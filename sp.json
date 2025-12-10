@@ -1,0 +1,41 @@
+[
+  {
+    "id": "PR01",
+    "name": "bánh osi",
+    "price": 10000,
+    "cateID": {
+      "cateID": "CA02",
+      "name": "Bánh"
+    },
+    "images": [
+      {
+        "id": 1,
+        "link": "example.com/1"
+      },
+      {
+        "id": 2,
+        "link": "example.com/2"
+      }
+    ]
+  },
+  {
+    "id": "PR02",
+    "name": "bánh kẹo",
+    "price": 5000,
+    "cateID": {
+      "cateID": "CA01",
+      "name": "Kẹo"
+    },
+    "images": []
+  },
+  {
+    "id": "PR03",
+    "name": "đào",
+    "price": 500,
+    "cateID": {
+      "cateID": "CA03",
+      "name": "Trái cây"
+    },
+    "images": []
+  }
+]

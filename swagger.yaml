@@ -1,0 +1,429 @@
+openapi: 3.0.0
+info:
+  title: API CRUD Mẫu (Users, Products, Categories) - 15 API
+  description: Tài liệu Swagger cho 15 API, đảm bảo đầy đủ 4 thao tác CRUD cho 3 tài nguyên chính (Người dùng, Sản phẩm, Danh mục).
+  version: 1.0.0
+servers:
+  - url: /
+    description: Base URL cho các API
+
+# =================================================================
+#                         1. ĐỊNH NGHĨA PATHS (15 API ENDPOINTS)
+# =================================================================
+paths:
+
+# -----------------------------------------------------------------
+#                          A. TÀI NGUYÊN: USERS (NGƯỜI DÙNG) - 5 API
+# -----------------------------------------------------------------
+  /users:
+    get:
+      tags:
+        - A. Users (5 API)
+      summary: 1. Lấy danh sách tất cả Người dùng (READ All)
+      responses:
+        '200':
+          description: Danh sách người dùng được trả về thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - A. Users (5 API)
+      summary: 2. Tạo Người dùng mới (CREATE)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: Người dùng được tạo thành công
+  /users/{userId}:
+    get:
+      tags:
+        - A. Users (5 API)
+      summary: 3. Lấy thông tin chi tiết của một Người dùng (READ One)
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID của người dùng (ObjectId)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Thông tin người dùng được trả về thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - A. Users (5 API)
+      summary: 4. Cập nhật toàn bộ thông tin Người dùng (UPDATE)
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID của người dùng (ObjectId)
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '200':
+          description: Người dùng được cập nhật thành công
+    delete:
+      tags:
+        - A. Users (5 API)
+      summary: 5. Xóa một Người dùng (DELETE)
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID của người dùng (ObjectId)
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Người dùng đã được xóa thành công
+
+# -----------------------------------------------------------------
+#                          B. TÀI NGUYÊN: PRODUCTS (SẢN PHẨM) - 5 API
+# -----------------------------------------------------------------
+  /product:
+    get:
+      tags:
+        - B. Products (5 API)
+      summary: 6. Lấy danh sách tất cả Sản phẩm (READ All)
+      responses:
+        '200':
+          description: Danh sách sản phẩm được trả về thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      tags:
+        - B. Products (5 API)
+      summary: 7. Tạo Sản phẩm mới (CREATE)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Sản phẩm được tạo thành công
+  /product/{productId}:
+    get:
+      tags:
+        - B. Products (5 API)
+      summary: 8. Lấy thông tin chi tiết của một Sản phẩm (READ One)
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID của sản phẩm (ObjectId)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Thông tin sản phẩm được trả về thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    put:
+      tags:
+        - B. Products (5 API)
+      summary: 9. Cập nhật toàn bộ thông tin Sản phẩm (UPDATE)
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID của sản phẩm (ObjectId)
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '200':
+          description: Sản phẩm được cập nhật thành công
+    delete:
+      tags:
+        - B. Products (5 API)
+      summary: 10. Xóa một Sản phẩm (DELETE)
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID của sản phẩm (ObjectId)
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Sản phẩm đã được xóa thành công
+
+# -----------------------------------------------------------------
+#                          C. TÀI NGUYÊN: CATEGORIES (DANH MỤC) - 5 API
+# -----------------------------------------------------------------
+  /danh-muc: # Path này hiện phục vụ cho Categories (Danh mục)
+    get:
+      tags:
+        - C. Categories (5 API)
+      summary: 11. Lấy danh sách tất cả Danh mục (READ All)
+      responses:
+        '200':
+          description: Danh sách danh mục được trả về thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    post:
+      tags:
+        - C. Categories (5 API)
+      summary: 12. Tạo Danh mục mới (CREATE)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryInput'
+      responses:
+        '201':
+          description: Danh mục được tạo thành công
+  /danh-muc/{categoryId}:
+    get:
+      tags:
+        - C. Categories (5 API)
+      summary: 13. Lấy thông tin chi tiết của một Danh mục (READ One)
+      parameters:
+        - name: categoryId # Đã đổi từ orderId
+          in: path
+          required: true
+          description: ID của danh mục (ObjectId)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Thông tin danh mục được trả về thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    put: # Thay vì PATCH status (như Orders), giờ là PUT toàn bộ Category
+      tags:
+        - C. Categories (5 API)
+      summary: 14. Cập nhật toàn bộ thông tin Danh mục (UPDATE)
+      parameters:
+        - name: categoryId # Đã đổi từ orderId
+          in: path
+          required: true
+          description: ID của danh mục (ObjectId)
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryInput'
+      responses:
+        '200':
+          description: Danh mục được cập nhật thành công
+    delete:
+      tags:
+        - C. Categories (5 API)
+      summary: 15. Xóa một Danh mục (DELETE)
+      parameters:
+        - name: categoryId # Đã đổi từ orderId
+          in: path
+          required: true
+          description: ID của danh mục (ObjectId)
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Danh mục đã được xóa thành công
+
+
+# =================================================================
+#                         2. ĐỊNH NGHĨA COMPONENTS (SCHEMAS)
+# =================================================================
+components:
+  schemas:
+
+    # ------------------ USERS (Đã sửa để khớp với User.js) ------------------
+    User:
+      description: Schema phản hồi cho Người dùng (Khớp với Mongoose User.js)
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          description: MongoDB ObjectId
+        name:
+          type: string
+          description: Tên người dùng (Khớp với User.js)
+        email:
+          type: string
+          format: email
+          description: Địa chỉ email
+        role:
+          type: string
+          enum: [user, admin]
+          default: user
+          description: Vai trò người dùng
+        status:
+          type: boolean
+          default: true
+          description: Trạng thái hoạt động
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - name
+        - email
+
+    UserInput:
+      description: Schema đầu vào khi tạo/cập nhật Người dùng
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tên người dùng (Khớp với User.js, thay thế username)
+        password:
+          type: string
+          format: password
+          description: Mật khẩu
+        email:
+          type: string
+          format: email
+          description: Địa chỉ email
+        phone:
+          type: string
+          description: Số điện thoại
+      required:
+        - name
+        - password
+        - email
+
+    # ------------------ PRODUCTS (Đã sửa để khớp với Product.js) ------------------
+    Product:
+      description: Schema phản hồi cho Sản phẩm (Khớp với Mongoose Product.js)
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          description: MongoDB ObjectId
+        name:
+          type: string
+          description: Tên sản phẩm
+        price:
+          type: number
+          format: float
+          description: Giá sản phẩm
+        quantity:
+          type: integer
+          description: Số lượng tồn kho (quantity, thay thế stock)
+        description:
+          type: string
+          description: Mô tả sản phẩm
+        cateID:
+          type: string
+          description: ID danh mục (ObjectId)
+        status:
+          type: boolean
+          default: true
+          description: Trạng thái sản phẩm
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - name
+        - price
+
+    ProductInput:
+      description: Schema đầu vào khi tạo/cập nhật Sản phẩm
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tên sản phẩm
+        price:
+          type: number
+          format: float
+          description: Giá sản phẩm
+        description:
+          type: string
+          description: Mô tả chi tiết
+        quantity:
+          type: integer
+          default: 0
+          description: Số lượng tồn kho (quantity, thay thế stock)
+        cateID:
+          type: string
+          description: ID danh mục (ObjectId)
+      required:
+        - name
+        - price
+
+    # ------------------ CATEGORY (Thay thế ORDERS) ------------------
+    Category:
+      description: Schema phản hồi cho Danh mục (Mới)
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          description: MongoDB ObjectId
+        name:
+          type: string
+          description: Tên danh mục (ví dụ: Điện thoại, Thời trang,...)
+        description:
+          type: string
+          description: Mô tả ngắn về danh mục
+        status:
+          type: boolean
+          default: true
+          description: Trạng thái hoạt động của danh mục
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - name
+
+    CategoryInput:
+      description: Schema đầu vào khi tạo/cập nhật Danh mục
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tên danh mục (ví dụ: Điện thoại, Thời trang,...)
+        description:
+          type: string
+          description: Mô tả ngắn về danh mục
+      required:
+        - name
